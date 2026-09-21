@@ -15,6 +15,7 @@
 html {
     font-size: 62.5%; /* 1rem = 10px */
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -23,7 +24,15 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     -webkit-font-smoothing: antialiased;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 ul, li {
@@ -152,6 +161,7 @@ img {
     color: #ffffff;
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
+    text-align: center;
 }
 
 .primary-btn:hover {
@@ -176,6 +186,7 @@ img {
     background-color: transparent;
     color: var(--primary-red);
     transition: all var(--transition-normal);
+    text-align: center;
 }
 
 .secondary-btn:hover {

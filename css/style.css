@@ -2,6 +2,76 @@
 @import url(./animations.css);
 
 /* ========================================================
+   EMERGENCY ALERT TOP BANNER
+   ======================================================== */
+
+.emergency-alert-banner {
+    background: linear-gradient(90deg, #b91c1c, #dc2626);
+    color: #ffffff;
+    padding: 0.9rem 1.6rem;
+    font-size: 1.35rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 950;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.alert-badge {
+    background-color: #ffffff;
+    color: #b91c1c;
+    padding: 0.2rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alert-action-link {
+    background-color: #ffffff;
+    color: #b91c1c;
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    transition: transform var(--transition-fast);
+}
+
+.alert-action-link:hover {
+    transform: scale(1.05);
+}
+
+.alert-dismiss-btn {
+    position: absolute;
+    right: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.alert-dismiss-btn:hover {
+    opacity: 1;
+}
+
+/* ========================================================
    SITE HEADER & NAVIGATION
    ======================================================== */
 

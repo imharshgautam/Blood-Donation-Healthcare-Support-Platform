@@ -16,10 +16,23 @@
     <script src="./js/theme.js" defer></script>
     <script src="./js/modal.js" defer></script>
     <script src="./js/counter.js" defer></script>
+    <script src="./js/alert.js" defer></script>
 </head>
 <body>
     <!-- Accessibility Skip Link -->
     <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <!-- Top Emergency Blood Alert Bar -->
+    <aside class="emergency-alert-banner" role="region" aria-label="Urgent Blood Requirement Notice">
+        <div class="alert-content">
+            <span class="alert-badge">Urgent Blood Need</span>
+            <span>🚨 <strong>O-Negative</strong> blood units required urgently for trauma emergency at City Hospital.</span>
+            <a href="./donate.html" class="alert-action-link">Donate Now</a>
+        </div>
+        <button type="button" class="alert-dismiss-btn" aria-label="Dismiss alert">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </aside>
 
     <!-- Main Navigation Header -->
     <header class="site-header">

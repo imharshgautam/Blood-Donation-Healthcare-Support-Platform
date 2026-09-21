@@ -282,6 +282,49 @@
     cursor: pointer;
 }
 
+/* Time Slot Selection Pills */
+.slot-pills-wrap {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+}
+
+.slot-pill {
+    flex: 1 1 calc(33.333% - 1.2rem);
+    min-width: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem 1.6rem;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-dark);
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.slot-pill:hover {
+    border-color: var(--primary-red);
+    color: var(--primary-red);
+    background-color: var(--primary-red-soft);
+}
+
+.slot-pill.selected {
+    background-color: var(--primary-red);
+    color: #ffffff;
+    border-color: var(--primary-red);
+    box-shadow: var(--shadow-sm);
+}
+
+.slot-pill span {
+    font-size: 1.8rem;
+}
+
 .c-file-input {
     padding: 1rem;
     border: 1px dashed var(--border-color);

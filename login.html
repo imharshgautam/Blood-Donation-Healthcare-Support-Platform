@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your Blood Donation Healthcare Support Platform account. Access donor history, schedule appointments, and manage requests.">
+    <title>Login | Blood Donation &amp; Healthcare Support Platform</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="shortcut icon" href="./images/android-chrome-192x192.png" type="image/x-icon">
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main Navigation">
+            <div class="logo">
+                <a href="./index.html" aria-label="Blood Donation Platform Home">
+                    <img src="./images/one blood logo.png" alt="Blood Donation Platform Logo">
+                </a>
+            </div>
+            <div class="nav-item-wrapper">
+                <ul class="nav-items" role="menubar">
+                    <li class="nav-item-1" role="none"><a href="./index.html" role="menuitem">Home</a></li>
+                    <li class="nav-item-2" role="none"><a href="./index.html#highlights" role="menuitem">Highlights</a></li>
+                    <li class="nav-item-3" role="none"><a href="./contact.html" role="menuitem">Need Blood</a></li>
+                    <li class="nav-item-3" role="none"><a href="./donate.html" role="menuitem">Donate Blood</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div><a href="./login.html"><button type="button" class="login-btn primary-btn active-auth-btn">Login</button></a></div>
+                <div><a href="./signup.html"><button type="button" class="sign-up-btn secondary-btn">Sign-up</button></a></div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Auth Container -->
+        <section class="auth-section container">
+            <div class="form-box form-wrap-1">
+                <div class="auth-header">
+                    <div class="auth-icon-badge">
+                        <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <h1 class="auth-title">Welcome Back</h1>
+                    <p class="auth-subtitle">Sign in to your donor &amp; healthcare portal</p>
+                </div>
+
+                <form action="./index.html" method="get" class="auth-form" aria-label="Login Form">
+                    <div class="auth-group">
+                        <label for="username" class="auth-label">Username or E-mail</label>
+                        <div class="input-icon-wrapper">
+                            <span class="material-symbols-outlined input-icon" aria-hidden="true">person</span>
+                            <input class="textbox" type="text" name="username" id="username" placeholder="Enter username or email" autocomplete="username" required>
+                        </div>
+                    </div>
+
+                    <div class="auth-group">
+                        <div class="label-row">
+                            <label for="password" class="auth-label">Password</label>
+                            <a href="#" class="forgot-pass" onclick="alert('Password reset link will be sent to your registered email.'); return false;">Forgot Password?</a>
+                        </div>
+                        <div class="input-icon-wrapper">
+                            <span class="material-symbols-outlined input-icon" aria-hidden="true">key</span>
+                            <input class="textbox" type="password" name="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+                        </div>
+                    </div>
+
+                    <div class="auth-options">
+                        <label class="checkbox-container" for="remember">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span>Keep me logged in</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="stbox primary-btn">Sign In</button>
+
+                    <div class="auth-footer-prompt">
+                        <p class="create-act">Don't have an account yet? <a href="./signup.html" class="auth-highlight-link">Create Account</a></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="foot-wrap container">
+            <div class="left-items-wrap">
+                <div class="foot-links-wrap">
+                    <div class="q-links-wrapper">
+                        <h3 class="q-links">Quick Links</h3>
+                        <ul>
+                            <li><a href="./index.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Home</span></div></a></li>
+                            <li><a href="./donate.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Become a Donor</span></div></a></li>
+                            <li><a href="./contact.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Emergency Support</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="imp-links-wrapper">
+                        <h3 class="imp-links">Information</h3>
+                        <ul>
+                            <li><a href="https://en.wikipedia.org/wiki/Blood_donation" target="_blank" rel="noopener noreferrer"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">About Donation</span></div></a></li>
+                            <li><a href="./contact.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Support Helpline</span></div></a></li>
+                            <li><a href="./contact.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Privacy Policy</span></div></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sm-links">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="./images/facebook.png" alt="Facebook"></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="./images/instagram.png" alt="Instagram"></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img src="./images/twitter.png" alt="Twitter"></a>
+                </div>
+            </div>
+            <div class="foot-divider-col"><hr class="foot-breaker"></div>
+            <div class="right-text-wrap">
+                <div class="foot-l-text">"One drop can save many lives"</div>
+                <p class="foot-desc">Join our healthcare support network to connect blood donors and hospitals nationwide.</p>
+                <div><a href="./donate.html"><button type="button" class="login-btn primary-btn">Donate Today</button></a></div>
+            </div>
+        </div>
+        <p class="container cr-text">Blood Donation &amp; Healthcare Support Platform &copy; 2026. All rights reserved.</p>
+    </footer>
+</body>
+</html>

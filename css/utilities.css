@@ -29,6 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 main {
@@ -77,7 +78,7 @@ img {
     --accent-emerald: #10b981;
     --accent-amber: #f59e0b;
 
-    /* Neutrals & Surfaces */
+    /* Neutrals & Surfaces (Light) */
     --bg-body: #f8fafc;
     --bg-surface: #ffffff;
     --bg-surface-elevated: #ffffff;
@@ -106,6 +107,30 @@ img {
     --transition-fast: 0.15s ease;
     --transition-normal: 0.25s ease;
     --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ========================================================
+   DARK THEME DESIGN TOKENS
+   ======================================================== */
+
+[data-theme="dark"] {
+    --bg-body: #0b0f19;
+    --bg-surface: #111827;
+    --bg-surface-elevated: #1f2937;
+    --bg-footer: #030712;
+    --text-dark: #f9fafb;
+    --text-body: #e5e7eb;
+    --text-muted: #9ca3af;
+    --text-light: #6b7280;
+    --border-color: #374151;
+    --border-subtle: #1f2937;
+    --primary-red-light: rgba(211, 47, 47, 0.2);
+    --primary-red-soft: rgba(211, 47, 47, 0.1);
+    --bg-white: #111827;
+    --text-black: #f9fafb;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.6);
 }
 
 /* ========================================================
@@ -140,6 +165,34 @@ img {
     background: var(--primary-red);
     color: #ffffff;
     z-index: 1000;
+}
+
+/* ========================================================
+   THEME TOGGLE BUTTON
+   ======================================================== */
+
+.theme-toggle-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 50%;
+    color: var(--text-dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--primary-red-light);
+    color: var(--primary-red);
+    border-color: var(--primary-red);
+}
+
+.theme-toggle-btn .material-symbols-outlined {
+    font-size: 2rem;
 }
 
 /* ========================================================

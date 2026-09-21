@@ -404,6 +404,187 @@
 }
 
 /* ========================================================
+   BLOOD DONATION DRIVES & CAMPS SECTION
+   ======================================================== */
+
+.drives-section {
+    padding: 8rem 0;
+    background-color: var(--bg-body);
+}
+
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.section-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.section-desc {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.drives-filter-tabs {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-surface);
+    color: var(--text-body);
+    font-size: 1.35rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background-color: var(--primary-red);
+    color: #ffffff;
+    border-color: var(--primary-red);
+}
+
+.drives-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.drive-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.drive-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(211, 47, 47, 0.3);
+}
+
+.drive-status-badge {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    padding: 0.4rem 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+}
+
+.drive-status-badge.live {
+    background-color: #fee2e2;
+    color: #dc2626;
+    animation: pulse 2s infinite;
+}
+
+.drive-status-badge.upcoming {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
+.drive-date-box {
+    width: 6.4rem;
+    height: 6.4rem;
+    background: linear-gradient(135deg, var(--primary-red), var(--primary-red-hover));
+    color: #ffffff;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-red);
+}
+
+.drive-day {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.drive-month {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.drive-name {
+    font-size: 1.9rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 1.2rem;
+}
+
+.drive-location,
+.drive-time {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.35rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+}
+
+.drive-location span,
+.drive-time span {
+    font-size: 1.8rem;
+    color: var(--primary-red);
+}
+
+.drive-slots {
+    margin: 1.6rem 0 2.2rem;
+    padding: 0.8rem 1.4rem;
+    background-color: var(--primary-red-soft);
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+.slots-count {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-red);
+}
+
+.drive-action {
+    margin-top: auto;
+}
+
+.drive-action button {
+    width: 100%;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* ========================================================
    DUAL CTA: DONATE VS NEED BLOOD
    ======================================================== */
 

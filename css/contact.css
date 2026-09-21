@@ -198,6 +198,56 @@
     box-shadow: 0 0 0 3px var(--primary-red-light);
 }
 
+.c-input.input-error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Form Toast Notification */
+.form-toast-alert {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--bg-surface);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    padding: 1.4rem 2.4rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 1.45rem;
+    font-weight: 600;
+    z-index: 2000;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 90%;
+}
+
+.form-toast-alert.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.form-toast-alert.error {
+    border-left: 5px solid #ef4444;
+}
+
+.form-toast-alert.error span.material-symbols-outlined {
+    color: #ef4444;
+}
+
+.form-toast-alert.success {
+    border-left: 5px solid #10b981;
+}
+
+.form-toast-alert.success span.material-symbols-outlined {
+    color: #10b981;
+}
+
 .c-select {
     cursor: pointer;
     appearance: auto;

@@ -7,6 +7,7 @@
     <meta name="description" content="Register as a blood donor - Blood Donation Healthcare Support Platform. Learn the 4-step donation process and schedule your appointment today.">
     <title>Become a Donor | Blood Donation Healthcare Support Platform</title>
     <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <link rel="shortcut icon" href="./images/android-chrome-192x192.png" type="image/x-icon">
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="./js/theme.js" defer></script>
+    <script src="./js/modal.js" defer></script>
     <script src="./js/dvalid.js" defer></script>
     <script src="./js/accordion.js" defer></script>
     <script src="./js/slots.js" defer></script>
@@ -242,6 +244,21 @@
                 </div>
             </div>
         </section>
+        <!-- Donor Milestone & Recognition Banner -->
+        <section class="donor-recognition-section container">
+            <div class="recognition-box">
+                <div class="recognition-text">
+                    <span class="badge-pill">Donor Honors</span>
+                    <h2 class="section-title">Life Saver Recognition Program</h2>
+                    <p>Every donation earns you verifiable badges, digital certificates of appreciation, and life-saver milestone honors.</p>
+                </div>
+                <div class="recognition-action">
+                    <button type="button" class="primary-btn" data-modal-target="#certificate-modal">
+                        <span class="material-symbols-outlined" style="margin-right: 0.8rem;">workspace_premium</span> View Sample Certificate
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Site Footer -->
@@ -281,5 +298,46 @@
         </div>
         <p class="container cr-text">Blood Donation &amp; Healthcare Support Platform &copy; 2026. All rights reserved.</p>
     </footer>
+
+    <!-- Digital Certificate Preview Modal -->
+    <div class="modal-overlay" id="certificate-modal" role="dialog" aria-modal="true" aria-labelledby="cert-title">
+        <div class="modal-card certificate-card">
+            <button type="button" class="modal-close-btn" data-modal-close aria-label="Close modal">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="certificate-inner">
+                <div class="cert-watermark"><span class="material-symbols-outlined">verified</span></div>
+                <div class="cert-header">
+                    <img src="./images/one blood logo.png" alt="Logo" class="cert-logo">
+                    <h2 id="cert-title" class="cert-heading">Certificate of Appreciation</h2>
+                    <p class="cert-tagline">PROUDLY PRESENTED FOR VOLUNTARY BLOOD DONATION</p>
+                </div>
+                <div class="cert-body">
+                    <p class="cert-text-intro">This certificate is honorably awarded to</p>
+                    <h3 class="cert-donor-name">Voluntary Life Saver</h3>
+                    <p class="cert-description">
+                        In sincere recognition of your selfless voluntary blood donation which has provided life-saving support to patients in emergency care.
+                    </p>
+                </div>
+                <div class="cert-footer">
+                    <div class="cert-sign">
+                        <div class="sign-line"></div>
+                        <p>Medical Director</p>
+                    </div>
+                    <div class="cert-badge-gold">
+                        <span class="material-symbols-outlined">military_tech</span>
+                        <p>Hero Donor</p>
+                    </div>
+                    <div class="cert-sign">
+                        <div class="sign-line"></div>
+                        <p>Healthcare Coordinator</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-actions" style="margin-top: 2rem; text-align: center;">
+                <button type="button" class="secondary-btn" onclick="window.print()"><span class="material-symbols-outlined" style="margin-right: 0.6rem;">print</span> Print Certificate</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

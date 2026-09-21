@@ -1,0 +1,59 @@
+/* ========================================================
+   PRINT STYLESHEET FOR APPOINTMENT SLIPS & CERTIFICATES
+   ======================================================== */
+
+@media print {
+    /* Hide interactive elements and chrome */
+    .site-header,
+    .navbar,
+    .footer,
+    .appointment-wrap,
+    .emergency-alert-banner,
+    .theme-toggle-btn,
+    .modal-close-btn,
+    .cert-actions,
+    .form-actions button,
+    .drives-filter-tabs {
+        display: none !important;
+    }
+
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt !important;
+    }
+
+    .container, .c-wrap, .modal-card {
+        max-width: 100% !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: 1px solid #000000 !important;
+        padding: 1.5cm !important;
+        margin: 0 !important;
+    }
+
+    .modal-overlay {
+        position: static !important;
+        background: transparent !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 0 !important;
+    }
+
+    .certificate-inner {
+        border: 4pt double #000000 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+    }
+
+    .cert-heading, .cert-donor-name {
+        color: #000000 !important;
+    }
+
+    a {
+        text-decoration: none !important;
+        color: #000000 !important;
+    }
+}

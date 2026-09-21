@@ -1,0 +1,286 @@
+@import url(./utilities.css);
+@import url(./style.css);
+
+/* ========================================================
+   DONOR & CONTACT HERO SECTION
+   ======================================================== */
+
+.donor-hero {
+    padding: 6rem 0 3rem;
+    text-align: center;
+}
+
+.donor-hero-content {
+    max-width: 76rem;
+    margin: 0 auto 4rem;
+}
+
+.badge-pill {
+    display: inline-block;
+    padding: 0.6rem 1.6rem;
+    background-color: var(--primary-red-light);
+    color: var(--primary-red);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.6rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-pill.emergency-pill {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.donor-page-title {
+    font-size: 4rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 1.6rem;
+}
+
+.donor-page-subtitle {
+    font-size: 1.6rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+}
+
+/* ========================================================
+   DONATION 4-STEP PROCESS GUIDE
+   ======================================================== */
+
+.donation-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.step-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.8rem 2.2rem;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(211, 47, 47, 0.3);
+}
+
+.step-num {
+    position: absolute;
+    top: 1.8rem;
+    right: 1.8rem;
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--border-color);
+    line-height: 1;
+}
+
+.step-icon {
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: var(--radius-md);
+    background-color: var(--primary-red-light);
+    color: var(--primary-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+}
+
+.step-icon span {
+    font-size: 2.4rem;
+}
+
+.step-card h3 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+}
+
+.step-card p {
+    font-size: 1.35rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* ========================================================
+   DONOR & CONTACT FORM STYLING
+   ======================================================== */
+
+.contact-section {
+    padding-bottom: 8rem;
+}
+
+.c-wrap {
+    max-width: 78rem;
+    margin: 0 auto;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 4.5rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.contact-heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+}
+
+.form-subtext {
+    font-size: 1.45rem;
+    color: var(--text-muted);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.c-text {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-body);
+    margin-bottom: 0.8rem;
+}
+
+.c-input {
+    width: 100%;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.45rem;
+    font-family: inherit;
+    color: var(--text-dark);
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.c-input:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px var(--primary-red-light);
+}
+
+.c-select {
+    cursor: pointer;
+    appearance: auto;
+}
+
+.c-textarea {
+    resize: vertical;
+    min-height: 10rem;
+    line-height: 1.5;
+}
+
+.radio-options {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 0.8rem 0;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    color: var(--text-body);
+    cursor: pointer;
+}
+
+.radio-item input[type="radio"] {
+    accent-color: var(--primary-red);
+    width: 1.8rem;
+    height: 1.8rem;
+    cursor: pointer;
+}
+
+.c-file-input {
+    padding: 1rem;
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-body);
+    font-size: 1.35rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.form-actions {
+    margin-top: 3.5rem;
+    text-align: center;
+}
+
+.form-actions button {
+    min-width: 26rem;
+    font-size: 1.55rem;
+    padding: 1.4rem 3rem;
+}
+
+/* ========================================================
+   RESPONSIVENESS FOR DONOR & CONTACT PAGES
+   ======================================================== */
+
+@media screen and (max-width: 992px) {
+    .donation-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .c-wrap {
+        padding: 3.5rem 2.5rem;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .donor-page-title {
+        font-size: 3rem;
+    }
+
+    .donation-steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}

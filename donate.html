@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register as a blood donor - Blood Donation Healthcare Support Platform. Learn the 4-step donation process and schedule your appointment today.">
+    <title>Become a Donor | Blood Donation Healthcare Support Platform</title>
+    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="shortcut icon" href="./images/android-chrome-192x192.png" type="image/x-icon">
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="./js/dvalid.js" defer></script>
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main Navigation">
+            <div class="logo">
+                <a href="./index.html" aria-label="Blood Donation Platform Home">
+                    <img src="./images/one blood logo.png" alt="Blood Donation Platform Logo">
+                </a>
+            </div>
+            <div class="nav-item-wrapper">
+                <ul class="nav-items" role="menubar">
+                    <li class="nav-item-1" role="none"><a href="./index.html" role="menuitem">Home</a></li>
+                    <li class="nav-item-2" role="none"><a href="./index.html#highlights" role="menuitem">Highlights</a></li>
+                    <li class="nav-item-3" role="none"><a href="./contact.html" role="menuitem">Need Blood</a></li>
+                    <li class="nav-item-3" role="none"><a href="./donate.html" class="active" role="menuitem">Donate Blood</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div><a href="./login.html"><button type="button" class="login-btn primary-btn">Login</button></a></div>
+                <div><a href="./signup.html"><button type="button" class="sign-up-btn secondary-btn">Sign-up</button></a></div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Donor Hero & Info Banner -->
+        <section class="donor-hero container" aria-labelledby="donor-heading">
+            <div class="donor-hero-content">
+                <span class="badge-pill">Life Saver Community</span>
+                <h1 id="donor-heading" class="donor-page-title">Register as a Blood Donor</h1>
+                <p class="donor-page-subtitle">
+                    Your single donation can save up to three lives. Fill out the registration form below to join our verified donor registry and schedule your donation appointment.
+                </p>
+            </div>
+
+            <!-- Donation 4-Step Process Guide -->
+            <div class="donation-steps-grid" aria-label="Donation Steps">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <div class="step-icon"><span class="material-symbols-outlined">assignment</span></div>
+                    <h3>Registration</h3>
+                    <p>Complete basic donor details, contact info, and medical history.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <div class="step-icon"><span class="material-symbols-outlined">health_and_safety</span></div>
+                    <h3>Mini-Checkup</h3>
+                    <p>Free check of temperature, pulse, blood pressure, and hemoglobin level.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <div class="step-icon"><span class="material-symbols-outlined">favorite</span></div>
+                    <h3>Donation</h3>
+                    <p>Takes only 8-10 minutes in a sterile, comfortable, caring environment.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <div class="step-icon"><span class="material-symbols-outlined">local_cafe</span></div>
+                    <h3>Refreshment</h3>
+                    <p>Enjoy healthy juices and snacks while relaxing for 10-15 minutes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donor Registration Form Section -->
+        <section class="contact-section container" aria-labelledby="form-heading">
+            <div class="c-wrap d-wrap">
+                <div class="form-header">
+                    <h2 id="form-heading" class="contact-heading">Donor Details</h2>
+                    <p class="form-subtext">Please ensure all medical details and contact numbers are accurate.</p>
+                </div>
+
+                <form action="" method="post" class="contact-form" onsubmit="return false;">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="fname" class="c-text">Full Name *</label>
+                            <input type="text" id="fname" required class="c-input" placeholder="e.g. John Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="c-text gender-label">Gender *</label>
+                            <div class="radio-options">
+                                <label class="radio-item" for="male">
+                                    <input type="radio" name="gender" id="male" value="Male" checked>
+                                    <span>Male</span>
+                                </label>
+                                <label class="radio-item" for="female">
+                                    <input type="radio" name="gender" id="female" value="Female">
+                                    <span>Female</span>
+                                </label>
+                                <label class="radio-item" for="others">
+                                    <input type="radio" name="gender" id="others" value="Others">
+                                    <span>Others</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ftype" class="c-text">Blood Group *</label>
+                            <select id="ftype" required class="c-input c-select">
+                                <option value="" disabled selected>Select your blood group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fage" class="c-text">Age (Years) *</label>
+                            <input type="number" id="fage" min="18" max="65" required class="c-input" placeholder="Min age: 18">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fweight" class="c-text">Current Weight (kg) *</label>
+                            <input type="number" id="fweight" min="45" max="180" required class="c-input" placeholder="Min weight: 50kg">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="femail" class="c-text">E-mail Address *</label>
+                            <input type="email" id="femail" required class="c-input" placeholder="you@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fphone" class="c-text">Phone Number *</label>
+                            <input type="tel" id="fphone" required class="c-input" placeholder="10-digit mobile number">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="fdetails" class="c-text">Medical History / Past Conditions (if any)</label>
+                            <textarea name="details" id="fdetails" rows="4" class="c-input c-textarea" placeholder="Mention any recent medication, surgeries, or chronic conditions..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="fproof" class="c-text">Government ID Proof (Govt ID / Driving License / Passport) *</label>
+                            <input type="file" name="idproof" id="fproof" class="c-file-input">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="dBtn primary-btn" onclick="dValidate()">Submit Donor Registration</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="foot-wrap container">
+            <div class="left-items-wrap">
+                <div class="foot-links-wrap">
+                    <div class="q-links-wrapper">
+                        <h3 class="q-links">Quick Links</h3>
+                        <ul>
+                            <li><a href="./index.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Home</span></div></a></li>
+                            <li><a href="./donate.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Become a Donor</span></div></a></li>
+                            <li><a href="./contact.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Request Blood</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="imp-links-wrapper">
+                        <h3 class="imp-links">Information</h3>
+                        <ul>
+                            <li><a href="https://en.wikipedia.org/wiki/Blood_donation" target="_blank" rel="noopener noreferrer"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Eligibility Rules</span></div></a></li>
+                            <li><a href="./contact.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Emergency Hotline</span></div></a></li>
+                            <li><a href="./contact.html"><div class="footer-link-wrapper"><span class="material-symbols-outlined">chevron_right</span><span class="footer-link-text">Privacy Policy</span></div></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sm-links">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="./images/facebook.png" alt="Facebook"></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="./images/instagram.png" alt="Instagram"></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img src="./images/twitter.png" alt="Twitter"></a>
+                </div>
+            </div>
+            <div class="foot-divider-col"><hr class="foot-breaker"></div>
+            <div class="right-text-wrap">
+                <div class="foot-l-text">"One drop can save many lives"</div>
+                <p class="foot-desc">Thank you for choosing to make a life-saving difference in someone's life.</p>
+                <div><a href="./donate.html"><button type="button" class="login-btn primary-btn">Donate Today</button></a></div>
+            </div>
+        </div>
+        <p class="container cr-text">Blood Donation &amp; Healthcare Support Platform &copy; 2026. All rights reserved.</p>
+    </footer>
+</body>
+</html>

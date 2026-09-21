@@ -304,8 +304,102 @@
 }
 
 /* ========================================================
-   RESPONSIVENESS FOR DONOR & CONTACT PAGES
+   FAQ & ELIGIBILITY ACCORDION
    ======================================================== */
+
+.faq-section {
+    padding-bottom: 9rem;
+    max-width: 82rem;
+    margin: 0 auto;
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.faq-title {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.faq-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.accordion-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.accordion-item {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+}
+
+.accordion-item.active {
+    border-color: rgba(211, 47, 47, 0.4);
+    box-shadow: var(--shadow-md);
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    text-align: left;
+    transition: color var(--transition-fast);
+}
+
+.accordion-header:hover {
+    color: var(--primary-red);
+}
+
+.accordion-icon {
+    font-size: 2.4rem;
+    color: var(--primary-red);
+    transition: transform var(--transition-normal);
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 2.5rem;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 30rem;
+    padding: 0 2.5rem 2.2rem;
+}
+
+.accordion-content p {
+    font-size: 1.45rem;
+    color: var(--text-body);
+    line-height: 1.65;
+}
 
 @media screen and (max-width: 992px) {
     .donation-steps-grid {

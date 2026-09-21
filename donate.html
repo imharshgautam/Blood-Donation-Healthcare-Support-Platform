@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="./js/theme.js" defer></script>
     <script src="./js/dvalid.js" defer></script>
+    <script src="./js/accordion.js" defer></script>
 </head>
 <body>
     <!-- Site Header -->
@@ -166,6 +167,57 @@
                         <button type="button" class="dBtn primary-btn" onclick="dValidate()">Submit Donor Registration</button>
                     </div>
                 </form>
+            </div>
+        </section>
+
+        <!-- Donor Eligibility & FAQs Accordion Section -->
+        <section class="faq-section container" aria-labelledby="faq-title">
+            <div class="faq-header">
+                <span class="badge-pill">Common Questions</span>
+                <h2 id="faq-title" class="faq-title">Blood Donation FAQs &amp; Eligibility</h2>
+                <p class="faq-subtitle">Everything you need to know before visiting a donation center.</p>
+            </div>
+
+            <div class="accordion-wrapper">
+                <div class="accordion-item active">
+                    <button type="button" class="accordion-header" aria-expanded="true">
+                        <span>How frequently can I donate blood?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Healthy whole blood donors can donate once every 56 days (8 weeks) for men, and every 12 weeks for women. Platelet donors can donate as often as every 7 days, up to 24 times a year.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span>Can I donate blood if I recently got a tattoo or piercing?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>If your tattoo or piercing was applied at a state-regulated, sterile medical facility, you may be eligible immediately or after 3 months depending on local health department regulations.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span>What should I do before and after donating blood?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Drink plenty of fluids (16 oz of water), eat a healthy iron-rich meal 2-3 hours prior, avoid heavy exercise for 12 hours afterward, and enjoy the post-donation refreshment snacks provided.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span>Is it safe to donate blood?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes! Blood donation is completely safe. All equipment, needles, and collection bags are 100% sterile, single-use, and disposed of immediately after donation.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

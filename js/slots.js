@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set default min date to today for appointment date input
     const dateInput = document.getElementById('fdate');
     if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
+        const now = new Date();
+        const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+            .map(value => String(value).padStart(2, '0'))
+            .join('-');
         dateInput.min = today;
         dateInput.value = today;
     }

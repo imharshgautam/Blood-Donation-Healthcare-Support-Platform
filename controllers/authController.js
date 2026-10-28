@@ -26,4 +26,54 @@ async function signup(req, res, next) {
   }
 }
 
-module.exports = { signup };
+async function login(req, res, next) {
+  try {
+    const identifier = req.body.username.trim();
+    const user = await User.findOne(identifier.includes('@')
+      ? { email: identifier.toLowerCase() }
+      : { username: identifier });
+
+    if (!user || !(await user.comparePassword(req.body.password))) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    req.session.regenerate((error) => {
+      if (error) return next(error);
+
+      req.session.userId = user.id;
+      if (req.body.remember) {
+        req.session.cookie.maxAge = Number(process.env.SESSION_MAX_AGE_MS) || 2592000000;
+      }
+
+      req.session.save((saveError) => {
+        if (saveError) return next(saveError);
+        return res.json({ message: 'Signed in successfully', user: user.toSafeJSON() });
+      });
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+function logout(req, res, next) {
+  req.session.destroy((error) => {
+    if (error) return next(error);
+
+    res.clearCookie('blood_donation_session', {
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: process.env.NODE_ENV === 'production',
+    });
+    return res.json({ message: 'Signed out successfully' });
+  });
+}
+
+function me(req, res) {
+  res.json({ user: req.user.toSafeJSON() });
+}
+
+function csrfToken(req, res) {
+  res.json({ csrfToken: res.locals.csrfToken });
+}
+
+module.exports = { signup, login, logout, me, csrfToken };

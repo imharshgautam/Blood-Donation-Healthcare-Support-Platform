@@ -1,7 +1,10 @@
 const express = require('express');
 const { body } = require('express-validator');
 
-const { signup } = require('../controllers/authController');
+const { signup, login, logout, me, csrfToken } = require('../controllers/authController');
+const requireAuth = require('../middleware/auth');
+const loginLimiter = require('../middleware/loginLimiter');
+const { ensureCsrfToken, csrf } = require('../middleware/csrf');
 const validate = require('../middleware/validate');
 
 const router = express.Router();
@@ -36,6 +39,22 @@ router.post('/signup', [
     .toBoolean()
     .custom((value) => value === true)
     .withMessage('You must accept the terms'),
-], validate, signup);
+], validate, csrf, signup);
+
+router.post('/login', loginLimiter, [
+  body('username')
+    .isString()
+    .trim()
+    .isLength({ min: 3, max: 254 })
+    .withMessage('Enter your email or username'),
+  body('password')
+    .isString()
+    .isLength({ min: 1, max: 72 })
+    .withMessage('Enter your password'),
+], validate, csrf, login);
+
+router.post('/logout', csrf, logout);
+router.get('/csrf', ensureCsrfToken, csrfToken);
+router.get('/me', requireAuth, me);
 
 module.exports = router;

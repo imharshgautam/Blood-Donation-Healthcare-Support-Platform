@@ -27,7 +27,14 @@ function createApp({ sessionStore } = {}) {
     res.json({ status: 'ok' });
   });
 
-  app.use('/public', express.static('public', { index: false }));
+  for (const assetDirectory of ['css', 'js', 'images']) {
+    app.use(`/${assetDirectory}`, express.static(assetDirectory, { index: false }));
+  }
+  for (const page of ['index', 'login', 'signup', 'donate', 'contact']) {
+    app.get(`/${page}.html`, (req, res) => res.sendFile(`${page}.html`, { root: process.cwd() }));
+  }
+  app.get('/', (req, res) => res.redirect('/index.html'));
+
   app.use(notFound);
   app.use(errorHandler);
 

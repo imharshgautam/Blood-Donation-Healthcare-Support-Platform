@@ -27,9 +27,7 @@ function createApp({ sessionStore } = {}) {
     res.json({ status: 'ok' });
   });
 
-  for (const assetDirectory of ['css', 'js', 'images']) {
-    app.use(`/${assetDirectory}`, express.static(assetDirectory, { index: false }));
-  }
+  app.use('/assets', express.static('assets', { index: false }));
   for (const page of ['index', 'login', 'signup', 'donate', 'contact']) {
     app.get(`/${page}.html`, (req, res) => {
       res.sendFile(`${page}.html`, { root: `${process.cwd()}/pages` });

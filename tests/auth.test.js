@@ -138,9 +138,9 @@ describe('authentication API', () => {
 
   test('serves the authentication frontend integrations', async () => {
     const loginPage = await request(app).get('/login.html').expect(200);
-    expect(loginPage.text).toContain('/js/login.js');
+    expect(loginPage.text).toContain('/assets/scripts/login.js');
 
     const signupPage = await request(app).get('/signup.html').expect(200);
-    expect(signupPage.text).toContain('/js/signup.js');
+    expect(signupPage.text).toContain('/assets/scripts/signup.js');
   });
 });

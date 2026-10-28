@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const openBtns = document.querySelectorAll('[data-modal-target]');
     const closeBtns = document.querySelectorAll('[data-modal-close]');
     const overlays = document.querySelectorAll('.modal-overlay');
+    const updateScrollLock = () => {
+        document.body.style.overflow = document.querySelector('.modal-overlay.active') ? 'hidden' : '';
+    };
 
     openBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -13,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetModal = document.querySelector(targetId);
             if (targetModal) {
                 targetModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+                updateScrollLock();
             }
         });
     });
@@ -23,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const modal = btn.closest('.modal-overlay');
             if (modal) {
                 modal.classList.remove('active');
-                document.body.style.overflow = '';
+                updateScrollLock();
             }
         });
     });
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) {
                 overlay.classList.remove('active');
-                document.body.style.overflow = '';
+                updateScrollLock();
             }
         });
     });
@@ -41,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             overlays.forEach(overlay => {
                 overlay.classList.remove('active');
-                document.body.style.overflow = '';
             });
+            updateScrollLock();
         }
     });
 });

@@ -8,10 +8,12 @@ function showFormToast(message, isSuccess = false) {
     const toast = document.createElement('div');
     toast.className = `form-toast-alert ${isSuccess ? 'success' : 'error'}`;
     toast.setAttribute('role', 'alert');
-    toast.innerHTML = `
-        <span class="material-symbols-outlined">${isSuccess ? 'check_circle' : 'error'}</span>
-        <span>${message}</span>
-    `;
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.textContent = isSuccess ? 'check_circle' : 'error';
+    const text = document.createElement('span');
+    text.textContent = message;
+    toast.append(icon, text);
     document.body.appendChild(toast);
 
     setTimeout(() => {
@@ -69,8 +71,8 @@ function rValidate() {
         showFormToast('Please enter a valid contact email.');
         return false;
     }
-    const phoneDigits = phone.replace(/\D/g, '');
-    if (!phone || phoneDigits.length < 10) {
+    const phoneDigits = phone.replace(/[\s()-]/g, '');
+    if (!/^\d{10}$/.test(phoneDigits)) {
         setFieldError('fphone');
         showFormToast('Please enter a valid 10-digit emergency phone number.');
         return false;

@@ -8,10 +8,12 @@ function showFormToast(message, isSuccess = false) {
     const toast = document.createElement('div');
     toast.className = `form-toast-alert ${isSuccess ? 'success' : 'error'}`;
     toast.setAttribute('role', 'alert');
-    toast.innerHTML = `
-        <span class="material-symbols-outlined">${isSuccess ? 'check_circle' : 'error'}</span>
-        <span>${message}</span>
-    `;
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.textContent = isSuccess ? 'check_circle' : 'error';
+    const text = document.createElement('span');
+    text.textContent = message;
+    toast.append(icon, text);
     document.body.appendChild(toast);
 
     setTimeout(() => {
@@ -50,11 +52,16 @@ function dValidate() {
     const detailsEl = document.getElementById('fdetails');
 
     const names = nameEl ? nameEl.value.trim() : '';
-    const age = ageEl ? parseInt(ageEl.value, 10) : 0;
-    const weight = weightEl ? parseInt(weightEl.value, 10) : 0;
+    const age = ageEl ? Number(ageEl.value) : 0;
+    const weight = weightEl ? Number(weightEl.value) : 0;
     const email = emailEl ? emailEl.value.trim() : '';
     const phone = phoneEl ? phoneEl.value.trim() : '';
     const type = typeEl ? typeEl.value : '';
+    const dateEl = document.getElementById('fdate');
+    const appointmentDate = dateEl ? dateEl.value : '';
+    const slotEl = document.getElementById('selected-slot');
+    const selectedSlot = slotEl ? slotEl.value : '';
+    const selectedSlotButton = document.querySelector('.slot-pill.selected[data-slot]');
 
     if (!names || names.length < 3) {
         setFieldError('fname');
@@ -66,14 +73,14 @@ function dValidate() {
         showFormToast('Please select your blood group.');
         return false;
     }
-    if (!age || age < 18 || age > 65) {
+    if (!Number.isInteger(age) || age < 18 || age > 65) {
         setFieldError('fage');
         showFormToast('Eligible donors must be between 18 and 65 years old.');
         return false;
     }
-    if (!weight || weight < 45) {
+    if (!Number.isFinite(weight) || weight < 45 || weight > 180) {
         setFieldError('fweight');
-        showFormToast('Donors must weigh at least 45-50 kg for safe blood donation.');
+        showFormToast('Donors must weigh between 45 and 180 kg.');
         return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -82,10 +89,30 @@ function dValidate() {
         showFormToast('Please provide a valid email address.');
         return false;
     }
-    const phoneDigits = phone.replace(/\D/g, '');
-    if (!phone || phoneDigits.length < 10) {
+    const phoneDigits = phone.replace(/[\s()-]/g, '');
+    if (!/^\d{10}$/.test(phoneDigits)) {
         setFieldError('fphone');
         showFormToast('Please enter a valid 10-digit phone number.');
+        return false;
+    }
+    const today = new Date();
+    const minimumDate = [today.getFullYear(), today.getMonth() + 1, today.getDate()]
+        .map(value => String(value).padStart(2, '0'))
+        .join('-');
+    if (!appointmentDate || appointmentDate < minimumDate) {
+        setFieldError('fdate');
+        showFormToast('Please select an appointment date that is today or later.');
+        return false;
+    }
+    if (!selectedSlot) {
+        const firstSlotButton = document.querySelector('.slot-pill');
+        if (firstSlotButton) firstSlotButton.focus();
+        showFormToast('Please select an appointment time slot.');
+        return false;
+    }
+    if (!selectedSlotButton || selectedSlotButton.getAttribute('data-slot') !== selectedSlot) {
+        if (selectedSlotButton) selectedSlotButton.focus();
+        showFormToast('Please select an appointment time slot.');
         return false;
     }
 

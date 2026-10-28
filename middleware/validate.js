@@ -8,7 +8,7 @@ function validate(req, res, next) {
 
   return res.status(400).json({
     message: 'Please correct the highlighted fields',
-    errors: errors.array().map(({ param, msg }) => ({ field: param, message: msg })),
+    errors: errors.array().map(({ path, param, msg }) => ({ field: path || param, message: msg })),
   });
 }
 

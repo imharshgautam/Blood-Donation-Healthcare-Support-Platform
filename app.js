@@ -31,7 +31,9 @@ function createApp({ sessionStore } = {}) {
     app.use(`/${assetDirectory}`, express.static(assetDirectory, { index: false }));
   }
   for (const page of ['index', 'login', 'signup', 'donate', 'contact']) {
-    app.get(`/${page}.html`, (req, res) => res.sendFile(`${page}.html`, { root: process.cwd() }));
+    app.get(`/${page}.html`, (req, res) => {
+      res.sendFile(`${page}.html`, { root: `${process.cwd()}/pages` });
+    });
   }
   app.get('/', (req, res) => res.redirect('/index.html'));
 

@@ -1,38 +1,51 @@
+
 /**
  * Live Impact Stats Counter Animation
  */
 document.addEventListener('DOMContentLoaded', () => {
     const statCounters = document.querySelectorAll('.stat-number[data-target]');
-    
+
     if (!statCounters.length) return;
 
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target'), 10);
-                animateCount(entry.target, target);
-                obs.unobserve(entry.target);
+            if (!entry.isIntersecting) return;
+
+            const counter = entry.target;
+            const target = Number.parseInt(counter.dataset.target, 10);
+
+            if (!Number.isFinite(target)) {
+                obs.unobserve(counter);
+                return;
             }
+
+            const suffix = counter.textContent.trim().endsWith('%') ? '%' : '+';
+
+            animateCount(counter, target, suffix);
+            obs.unobserve(counter);
         });
     }, { threshold: 0.5 });
 
     statCounters.forEach(counter => observer.observe(counter));
 });
 
-function animateCount(element, target) {
-    let current = 0;
+function animateCount(element, target, suffix) {
     const duration = 1500;
-    const stepTime = 20;
-    const steps = duration / stepTime;
-    const increment = target / steps;
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target.toLocaleString() + '+';
-            clearInterval(timer);
+    function updateCount(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(target * progress);
+
+        element.textContent = current.toLocaleString() + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCount);
         } else {
-            element.textContent = Math.floor(current).toLocaleString() + '+';
+            element.textContent = target.toLocaleString() + suffix;
         }
-    }, stepTime);
+    }
+
+    requestAnimationFrame(updateCount);
 }

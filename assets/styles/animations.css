@@ -1,0 +1,70 @@
+/* ========================================================
+   MICRO-INTERACTIONS & KEYFRAME ANIMATIONS
+   ======================================================== */
+
+/* Smooth fade-in up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shimmer / Skeleton Loading */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-body) 25%, var(--border-color) 50%, var(--bg-body) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
+}
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Heartbeat pulse animation for emergency / blood icons */
+@keyframes heartPulse {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+}
+
+.pulse-heart {
+    display: inline-block;
+    animation: heartPulse 2.2s infinite;
+    color: var(--primary-red);
+}
+
+/* Button ripple / active micro-interaction */
+.primary-btn:active,
+.secondary-btn:active,
+.donate-btn:active,
+.recieve-btn:active {
+    transform: scale(0.97);
+}
+
+/* Smooth input active outline */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary-red);
+    outline-offset: 2px;
+}

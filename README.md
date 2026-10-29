@@ -9,6 +9,14 @@ The portal includes an operations overview, donor directory, blood request queue
 inventory, appointments, reports, and notification settings. It supports browser
 search and filters, CSV exports, and local demo record updates.
 
+### Demo data and privacy
+
+The portal starts with illustrative sample records. Changes are saved in this
+browser using `localStorage`; clearing the site's local storage restores the
+original sample data. The portal is a frontend prototype with no server-backed
+records, role-based access control, or admin authentication. Do not enter real
+patient or donor information, and do not use it to coordinate live medical care.
+
 BloodLink is a static admin portal for coordinating a blood donation network.
 
 ## Run

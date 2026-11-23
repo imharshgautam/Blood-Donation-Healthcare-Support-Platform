@@ -269,6 +269,7 @@ let dashboardPeriod = 'This month';
 let toastTimer;
 let modalMode = '';
 let modalRecord = null;
+let modalTriggerElement = null;
 let pendingGlobalQuery = null;
 
 const escapeHtml = (value) =>
@@ -317,7 +318,7 @@ function personCell(name, detail, initials) {
 }
 
 function pageHeading(title, subtitle, actions = '') {
-  return `<div class="page-heading"><div><span class="eyebrow">BLOODLINK / OPERATIONS</span><h1>${title}</h1><p class="page-subtitle">${subtitle}</p></div><div class="heading-actions">${actions}</div></div>`;
+  return `<div class="page-heading"><div><span class="eyebrow">BLOODLINK / OPERATIONS</span><h1 tabindex="-1">${title}</h1><p class="page-subtitle">${subtitle}</p></div><div class="heading-actions">${actions}</div></div>`;
 }
 
 function sectionLink(page, label) {
@@ -656,6 +657,7 @@ const field = (
 function openModal(mode, value = '') {
   modalMode = mode;
   modalRecord = null;
+  modalTriggerElement = document.activeElement;
   if (mode === 'edit-donors' || mode === 'edit-requests' || mode === 'edit-appointments') {
     const collection = mode.replace('edit-', '');
     modalRecord = state[collection].find((record) => String(record.id) === String(value));
@@ -765,6 +767,9 @@ function openModal(mode, value = '') {
 function closeModal() {
   modalBackdrop.hidden = true;
   document.querySelector('#record-form').reset();
+  const trigger = modalTriggerElement;
+  modalTriggerElement = null;
+  if (trigger?.isConnected) trigger.focus();
 }
 
 function showToast(message) {
@@ -1048,6 +1053,7 @@ document.querySelector('#record-form').addEventListener('submit', (event) => {
   if (saveState()) {
     closeModal();
     renderPage();
+    document.querySelector('.page-heading h1')?.focus();
   }
 });
 
@@ -1128,6 +1134,24 @@ document.querySelector('.global-search').addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (event) => {
+  if (event.key === 'Tab' && !modalBackdrop.hidden) {
+    const modal = modalBackdrop.querySelector('.modal');
+    const focusable = Array.from(
+      modal.querySelectorAll(
+        'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((element) => !element.hidden);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const focusOutsideModal = !modal.contains(document.activeElement);
+    if (event.shiftKey && (document.activeElement === first || focusOutsideModal)) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || focusOutsideModal)) {
+      event.preventDefault();
+      first?.focus();
+    }
+  }
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
     event.preventDefault();
     document.querySelector('#global-search').focus();

@@ -371,7 +371,7 @@ function inventoryRows(compact = false) {
 
 function dashboardPage() {
   const recent = state.requests.slice(0, 4);
-  const lowCount = state.inventory.filter((item) => item.units / item.capacity < 0.3).length;
+  const lowStock = state.inventory.filter((item) => item.units / item.capacity < 0.3);
   const month = new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' }).format(
     new Date(),
   );
@@ -388,7 +388,7 @@ function dashboardPage() {
         <article class="panel"><div class="panel-header"><div><h2 class="panel-title">Recent blood requests</h2><p class="panel-subtitle">Latest requests from partner facilities</p></div>${sectionLink('requests', 'View all')}</div><div class="table-scroll"><table><thead><tr><th>REQUEST</th><th>BLOOD TYPE</th><th>UNITS</th><th>NEEDED BY</th><th>STATUS</th></tr></thead><tbody>${recent.map((request) => `<tr><td><span class="request-name">${escapeHtml(request.id)} <span style="color:#9ba29e;font-weight:400">${escapeHtml(request.patient)}</span></span></td><td><span class="blood-type">${escapeHtml(request.blood)}</span></td><td>${request.units}</td><td>${escapeHtml(request.needed)}</td><td>${statusPill(request.status)}</td></tr>`).join('')}</tbody></table></div><div class="table-footer"><span>Showing ${recent.length} of ${state.requests.length} requests</span><span>Updated just now</span></div></article>
       </div>
       <div class="column-stack">
-        <article class="panel"><div class="panel-header"><div><h2 class="panel-title">Blood inventory</h2><p class="panel-subtitle">Current stock across all centers</p></div>${sectionLink('inventory', 'Manage')}</div><div class="inventory-list">${inventoryRows(true)}</div>${lowCount ? `<div class="alert-banner"><span class="alert-mark">!</span><div class="alert-copy"><strong>${lowCount} blood types running low</strong><p>O−, B− and AB− stock is below the recommended level.</p></div></div>` : ''}</article>
+        <article class="panel"><div class="panel-header"><div><h2 class="panel-title">Blood inventory</h2><p class="panel-subtitle">Current stock across all centers</p></div>${sectionLink('inventory', 'Manage')}</div><div class="inventory-list">${inventoryRows(true)}</div>${lowStock.length ? `<div class="alert-banner"><span class="alert-mark">!</span><div class="alert-copy"><strong>${lowStock.length} blood type${lowStock.length === 1 ? '' : 's'} running low</strong><p>${lowStock.map((item) => escapeHtml(item.blood)).join(', ')} stock is below the recommended level.</p></div></div>` : ''}</article>
         <article class="panel activity-panel"><div class="panel-header"><div><h2 class="panel-title">Live request activity</h2><p class="panel-subtitle">Network-wide · updated in real time</p></div><span class="date-dot" title="Live"></span></div><div class="activity-list">${getActivity()
           .map(
             (item) =>

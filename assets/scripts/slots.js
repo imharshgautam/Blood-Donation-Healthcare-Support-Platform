@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .map(value => String(value).padStart(2, '0'))
             .join('-');
         dateInput.min = today;
-        dateInput.value = today;
+        dateInput.value = new URLSearchParams(window.location.search).get('date') || today;
     }
+
+    const params = new URLSearchParams(window.location.search);
+    const drive = params.get('drive');
+    const locationInput = document.getElementById('flocation');
+    if (drive && locationInput) locationInput.value = drive;
+    if (drive && dateInput && params.has('date')) dateInput.readOnly = true;
 });

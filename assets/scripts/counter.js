@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function animateCount(element, target) {
     let current = 0;
+    const suffix = element.textContent.includes('%') ? '%' : '+';
     const duration = 1500;
     const stepTime = 20;
     const steps = duration / stepTime;
@@ -29,10 +30,10 @@ function animateCount(element, target) {
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-            element.textContent = target.toLocaleString() + '+';
+            element.textContent = target.toLocaleString() + suffix;
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(current).toLocaleString() + '+';
+            element.textContent = Math.floor(current).toLocaleString() + suffix;
         }
     }, stepTime);
 }

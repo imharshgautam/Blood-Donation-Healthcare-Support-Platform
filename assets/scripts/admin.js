@@ -596,29 +596,45 @@ function applyDonorFilters() {
   const group = document.querySelector('#donor-group-filter')?.value || 'all';
   const status = document.querySelector('#donor-status-filter')?.value || 'all';
   body.innerHTML = donorRows(currentQuery, group, status);
+  updateFilteredCount('donors', 'donors');
 }
 
 function applyRequestFilters() {
   const body = document.querySelector('#records-body');
-  if (body)
+  if (body) {
     body.innerHTML = requestRows(
       currentQuery,
       document.querySelector('#request-status-filter')?.value || 'all',
     );
+    updateFilteredCount('requests', 'requests');
+  }
 }
 
 function applyInventoryFilters() {
   const body = document.querySelector('#records-body');
-  if (body) body.innerHTML = inventoryTableRows(currentQuery);
+  if (body) {
+    body.innerHTML = inventoryTableRows(currentQuery);
+    updateFilteredCount('inventory', 'inventory records');
+  }
 }
 
 function applyAppointmentFilters() {
   const body = document.querySelector('#records-body');
-  if (body)
+  if (body) {
     body.innerHTML = appointmentRows(
       currentQuery,
       document.querySelector('#appointment-status-filter')?.value || 'all',
     );
+    updateFilteredCount('appointments', 'appointments');
+  }
+}
+
+function updateFilteredCount(collection, label) {
+  const body = document.querySelector('#records-body');
+  const count = document.querySelector('.table-footer span:first-child');
+  if (!body || !count) return;
+  const visible = body.querySelector('.empty-state') ? 0 : body.querySelectorAll('tr').length;
+  count.textContent = `Showing ${visible} of ${state[collection].length} ${label}`;
 }
 
 const field = (

@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sign in to your Blood Donation Healthcare Support Platform account. Access donor history, schedule appointments, and manage requests.">
     <title>Login | Blood Donation &amp; Healthcare Support Platform</title>
-    <link rel="stylesheet" href="./assets/styles/login.css">
-    <link rel="shortcut icon" href="./assets/images/android-chrome-192x192.png" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/styles/login.css">
+    <link rel="shortcut icon" href="../assets/images/android-chrome-192x192.png" type="image/x-icon">
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="./assets/scripts/theme.js" defer></script>
-    <script src="./assets/scripts/auth-api.js" defer></script>
-    <script src="./assets/scripts/login.js" defer></script>
+    <script src="../assets/scripts/theme.js" defer></script>
+    <script src="../assets/scripts/platform-data.js" defer></script>
+    <script src="../assets/scripts/account-nav.js" defer></script>
+    <script src="../assets/scripts/login.js" defer></script>
 </head>
 <body>
     <!-- Site Header -->
@@ -23,7 +24,7 @@
         <nav class="navbar container" aria-label="Main Navigation">
             <div class="logo">
                 <a href="./index.html" aria-label="Blood Donation Platform Home">
-                    <img src="./assets/images/one blood logo.png" alt="Blood Donation Platform Logo">
+                    <img src="../assets/images/one blood logo.png" alt="Blood Donation Platform Logo">
                 </a>
             </div>
             <div class="nav-item-wrapper">
@@ -56,7 +57,7 @@
                     <p class="auth-subtitle">Sign in to your donor &amp; healthcare portal</p>
                 </div>
 
-                <form action="./index.html" method="get" class="auth-form" aria-label="Login Form">
+                <form action="./login.html" method="post" class="auth-form" aria-label="Login Form">
                     <div class="auth-group">
                         <label for="username" class="auth-label">Username or E-mail</label>
                         <div class="input-icon-wrapper">
@@ -68,7 +69,7 @@
                     <div class="auth-group">
                         <div class="label-row">
                             <label for="password" class="auth-label">Password</label>
-                            <a href="#" class="forgot-pass" onclick="alert('Password reset link will be sent to your registered email.'); return false;">Forgot Password?</a>
+                            <a href="#" class="forgot-pass">Forgot Password?</a>
                         </div>
                         <div class="input-icon-wrapper">
                             <span class="material-symbols-outlined input-icon" aria-hidden="true">key</span>
@@ -116,9 +117,9 @@
                     </div>
                 </div>
                 <div class="sm-links">
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="./assets/images/facebook.png" alt="Facebook"></a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="./assets/images/instagram.png" alt="Instagram"></a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img src="./assets/images/twitter.png" alt="Twitter"></a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="../assets/images/facebook.png" alt="Facebook"></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="../assets/images/instagram.png" alt="Instagram"></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img src="../assets/images/twitter.png" alt="Twitter"></a>
                 </div>
             </div>
             <div class="foot-divider-col"><hr class="foot-breaker"></div>

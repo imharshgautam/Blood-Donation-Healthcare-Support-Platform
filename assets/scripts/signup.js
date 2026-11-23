@@ -3,45 +3,66 @@
   if (!form) return;
 
   const submitButton = form.querySelector('button[type="submit"]');
-  let submitting = false;
-
-  function showMessage(message, type = 'error') {
-    let status = form.querySelector('[role="alert"]');
-    if (!status) {
-      status = document.createElement('p');
-      status.setAttribute('role', 'alert');
-      status.className = 'auth-message';
-      submitButton.before(status);
-    }
-    status.className = `auth-message ${type}`;
-    status.textContent = message;
-  }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (submitting) return;
-
     if (!form.reportValidity()) return;
-    submitting = true;
+
+    const data = new FormData(form);
+    const email = String(data.get('email')).trim().toLowerCase();
+    const username = String(data.get('username')).trim();
+    const password = String(data.get('password'));
+    const confirmPassword = String(data.get('confirmPassword'));
+
+    if (!/^[a-zA-Z0-9._-]{3,30}$/.test(username)) {
+      window.PlatformStore.showMessage(form, 'Username must be 3–30 characters and use only letters, numbers, dots, underscores, or hyphens.');
+      form.elements.username.focus();
+      return;
+    }
+    if (password.length < 8 || !/[A-Za-z]/.test(password) || !/\d/.test(password)) {
+      window.PlatformStore.showMessage(form, 'Use at least 8 characters, including a letter and a number.');
+      form.elements.password.focus();
+      return;
+    }
+    if (password !== confirmPassword) {
+      window.PlatformStore.showMessage(form, 'The passwords do not match.');
+      form.elements.confirmPassword.focus();
+      return;
+    }
+
     submitButton.disabled = true;
     submitButton.textContent = 'Creating account...';
-
     try {
-      const data = new FormData(form);
-      const result = await window.AuthAPI.authenticatedRequest('/api/auth/signup', {
-        email: data.get('email'),
-        username: data.get('username'),
-        password: data.get('password'),
-        tandc: data.get('tandc') === 'on',
+      const accounts = window.PlatformStore.read().users;
+      if (accounts.some((user) => user.email.toLowerCase() === email)) {
+        throw new Error('An account already exists for that email address.');
+      }
+      if (accounts.some((user) => user.username.toLowerCase() === username.toLowerCase())) {
+        throw new Error('That username is already in use.');
+      }
+
+      const credential = await window.PlatformStore.hashPassword(password);
+      window.PlatformStore.update((current) => {
+        if (current.users.some((user) => user.email.toLowerCase() === email)) {
+          throw new Error('An account already exists for that email address.');
+        }
+        if (current.users.some((user) => user.username.toLowerCase() === username.toLowerCase())) {
+          throw new Error('That username is already in use.');
+        }
+        current.users.push({
+          id: window.crypto.randomUUID(),
+          email,
+          username,
+          passwordSalt: credential.salt,
+          passwordHash: credential.hash,
+          createdAt: new Date().toISOString(),
+        });
       });
-      showMessage(result.message, 'success');
-      window.setTimeout(() => window.location.assign('./login.html'), 700);
+      window.PlatformStore.showMessage(form, 'Account created in this browser. You can now sign in.', 'success');
+      form.reset();
     } catch (error) {
-      showMessage(error.message);
-      const fieldError = error.errors?.[0]?.field;
-      if (fieldError) form.elements[fieldError]?.focus();
+      window.PlatformStore.showMessage(form, error.message);
     } finally {
-      submitting = false;
       submitButton.disabled = false;
       submitButton.textContent = 'Create Account';
     }

@@ -1,35 +1,31 @@
 (() => {
-  async function updateNavigation() {
-    const navRight = document.querySelector('.nav-right');
-    if (!navRight) return;
+  const navRight = document.querySelector('.nav-right');
+  if (!navRight) return;
 
-    try {
-      const { user } = await window.AuthAPI.request('/api/auth/me');
-      const loginLink = navRight.querySelector('a[href="./login.html"]');
-      const signupLink = navRight.querySelector('a[href="./signup.html"]');
-      if (loginLink) loginLink.remove();
-      if (signupLink) signupLink.remove();
-
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'login-btn primary-btn';
-      button.textContent = 'Log out';
-      button.addEventListener('click', async () => {
-        button.disabled = true;
-        try {
-          await window.AuthAPI.authenticatedRequest('/api/auth/logout');
-          window.location.reload();
-        } catch (error) {
-          button.disabled = false;
-          window.alert(error.message);
-        }
-      });
-      navRight.append(button);
-      navRight.setAttribute('aria-label', `Signed in as ${user.username}`);
-    } catch (error) {
-      if (error.status !== 401) console.error(error);
-    }
+  let user;
+  try {
+    const serialized = localStorage.getItem('blood-donation-session') || sessionStorage.getItem('blood-donation-session');
+    user = serialized ? JSON.parse(serialized) : null;
+  } catch (error) {
+    window.PlatformStore?.showToast('Your saved sign-in could not be read. Please sign in again.');
+    localStorage.removeItem('blood-donation-session');
+    sessionStorage.removeItem('blood-donation-session');
+    return;
   }
+  if (!user?.username) return;
 
-  updateNavigation();
+  navRight.querySelector('a[href="./login.html"]')?.parentElement.remove();
+  navRight.querySelector('a[href="./signup.html"]')?.parentElement.remove();
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'login-btn primary-btn';
+  button.textContent = 'Log out';
+  button.setAttribute('aria-label', `Log out ${user.username}`);
+  button.addEventListener('click', () => {
+    localStorage.removeItem('blood-donation-session');
+    sessionStorage.removeItem('blood-donation-session');
+    window.location.reload();
+  });
+  navRight.append(button);
+  navRight.setAttribute('aria-label', `Signed in as ${user.username}`);
 })();

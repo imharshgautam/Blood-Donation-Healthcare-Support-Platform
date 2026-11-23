@@ -402,7 +402,7 @@ function dashboardPage() {
 function tableShell(title, subtitle, headers, rows, options = {}) {
   const search = `<label class="table-search">${icon('search')}<input type="search" id="table-search" placeholder="${options.searchPlaceholder || 'Search records...'}" value="${escapeHtml(currentQuery)}" /></label>`;
   const filters = options.filters ? `<div class="toolbar-filters">${options.filters}</div>` : '';
-  return `<article class="panel data-page-panel"><div class="panel-header"><div><h2 class="panel-title">${title}</h2><p class="panel-subtitle">${subtitle}</p></div>${options.headerAction || ''}</div><div class="toolbar-row">${search}${filters}</div><div class="table-scroll"><table class="data-table"><thead><tr>${headers.map((header) => `<th>${header}</th>`).join('')}</tr></thead><tbody id="records-body">${rows || ''}</tbody></table></div><div class="table-footer"><span>${options.footer || ''}</span><span>Saved in this browser</span></div></article>`;
+  return `<article class="panel data-page-panel"><div class="panel-header"><div><h2 class="panel-title">${title}</h2><p class="panel-subtitle">${subtitle}</p></div>${options.headerAction || ''}</div><div class="toolbar-row">${search}${filters}<button type="button" class="button button-quiet" data-action="clear-filters" hidden>Clear filters</button></div><div class="table-scroll"><table class="data-table"><thead><tr>${headers.map((header) => `<th>${header}</th>`).join('')}</tr></thead><tbody id="records-body">${rows || ''}</tbody></table></div><div class="table-footer"><span>${options.footer || ''}</span><span>Saved in this browser</span></div></article>`;
 }
 
 function donorRows(query = '', group = 'all', status = 'all') {
@@ -588,6 +588,7 @@ function renderPage() {
   if (currentPage === 'requests') applyRequestFilters();
   if (currentPage === 'inventory') applyInventoryFilters();
   if (currentPage === 'appointments') applyAppointmentFilters();
+  updateClearFiltersButton();
 }
 
 function applyDonorFilters() {
@@ -619,6 +620,16 @@ function applyAppointmentFilters() {
       currentQuery,
       document.querySelector('#appointment-status-filter')?.value || 'all',
     );
+}
+
+function updateClearFiltersButton() {
+  const clearButton = document.querySelector('[data-action="clear-filters"]');
+  if (!clearButton) return;
+
+  const hasSelectedFilter = [...document.querySelectorAll('.toolbar-filters select')].some(
+    (select) => select.value !== 'all',
+  );
+  clearButton.hidden = !currentQuery && !hasSelectedFilter;
 }
 
 const field = (
@@ -785,6 +796,22 @@ document.addEventListener('click', (event) => {
     return;
   }
   const action = event.target.closest('[data-action]')?.dataset.action;
+  if (action === 'clear-filters') {
+    currentQuery = '';
+    document.querySelector('#global-search').value = '';
+    const tableSearch = document.querySelector('#table-search');
+    if (tableSearch) tableSearch.value = '';
+    document.querySelectorAll('.toolbar-filters select').forEach((select) => {
+      select.value = 'all';
+    });
+    if (currentPage === 'donors') applyDonorFilters();
+    if (currentPage === 'requests') applyRequestFilters();
+    if (currentPage === 'inventory') applyInventoryFilters();
+    if (currentPage === 'appointments') applyAppointmentFilters();
+    updateClearFiltersButton();
+    tableSearch?.focus();
+    return;
+  }
   if (action === 'new-request') openModal('request');
   if (action === 'new-donor') openModal('donor');
   if (action === 'new-appointment') openModal('appointment');
@@ -914,6 +941,7 @@ document.addEventListener('input', (event) => {
     if (currentPage === 'requests') applyRequestFilters();
     if (currentPage === 'inventory') applyInventoryFilters();
     if (currentPage === 'appointments') applyAppointmentFilters();
+    updateClearFiltersButton();
   }
   if (event.target.id === 'global-search') {
     currentQuery = event.target.value;
@@ -924,6 +952,7 @@ document.addEventListener('input', (event) => {
     if (currentPage === 'inventory') applyInventoryFilters();
     if (currentPage === 'appointments') applyAppointmentFilters();
   }
+  updateClearFiltersButton();
 });
 
 document.addEventListener('change', (event) => {
@@ -935,6 +964,7 @@ document.addEventListener('change', (event) => {
     dashboardPeriod = event.target.value;
     renderPage();
   }
+  updateClearFiltersButton();
 });
 
 document.querySelector('#record-form').addEventListener('submit', (event) => {

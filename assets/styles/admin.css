@@ -178,6 +178,8 @@ tbody tr:last-child td { border-bottom: 0; }
 .filter-select { height: 33px; font-size: 9px; }
 .data-table th { padding: 11px 15px; }
 .data-table td { padding: 12px 15px; }
+.row-actions { white-space: nowrap; }
+.row-actions .button { min-height: 28px; padding: 0 8px; }
 .person-cell { display: flex; align-items: center; gap: 9px; }
 .person-cell strong { display: block; color: #39413c; font-size: 9px; font-weight: 600; }
 .person-cell small { display: block; margin-top: 3px; color: #9ba29e; font-size: 8px; }

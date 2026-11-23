@@ -5,7 +5,9 @@ async function connectDatabase(uri = process.env.MONGODB_URI) {
     throw new Error('MONGODB_URI is required');
   }
 
-  await mongoose.connect(uri);
+  await mongoose.connect(uri, {
+    serverSelectionTimeoutMS: 5000,
+  });
 }
 
 async function disconnectDatabase() {

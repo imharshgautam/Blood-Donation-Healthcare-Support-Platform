@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const session = require('express-session');
+
 const { createApp } = require('./app');
 const { connectDatabase } = require('./config/db');
 const { createSessionStore } = require('./config/session');
@@ -7,10 +9,26 @@ const { createSessionStore } = require('./config/session');
 const port = Number(process.env.PORT) || 3000;
 
 async function start() {
-  await connectDatabase();
-  const app = createApp({ sessionStore: createSessionStore() });
+  let sessionStore;
+
+  if (process.env.MONGODB_URI) {
+    try {
+      await connectDatabase();
+      sessionStore = createSessionStore();
+    } catch (error) {
+      console.warn(`MongoDB unavailable (${error.message}); starting with in-memory sessions.`);
+    }
+  } else {
+    console.warn('MONGODB_URI is not set; starting with in-memory sessions (browser-local features active).');
+  }
+
+  if (!sessionStore) {
+    sessionStore = new session.MemoryStore();
+  }
+
+  const app = createApp({ sessionStore });
   app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Server listening on http://localhost:${port}`);
   });
 }
 

@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const { body } = require('express-validator');
 
 const { signup, login, logout, me, csrfToken } = require('../controllers/authController');
@@ -9,7 +10,16 @@ const validate = require('../middleware/validate');
 
 const router = express.Router();
 
-router.post('/signup', [
+function requireDatabase(req, res, next) {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      message: 'Database is not connected. Configure MONGODB_URI to use server authentication.',
+    });
+  }
+  return next();
+}
+
+router.post('/signup', requireDatabase, [
   body('email')
     .isString()
     .trim()
@@ -41,7 +51,7 @@ router.post('/signup', [
     .withMessage('You must accept the terms'),
 ], validate, csrf, signup);
 
-router.post('/login', loginLimiter, [
+router.post('/login', requireDatabase, loginLimiter, [
   body('username')
     .isString()
     .trim()
@@ -55,6 +65,6 @@ router.post('/login', loginLimiter, [
 
 router.post('/logout', csrf, logout);
 router.get('/csrf', ensureCsrfToken, csrfToken);
-router.get('/me', requireAuth, me);
+router.get('/me', requireDatabase, requireAuth, me);
 
 module.exports = router;

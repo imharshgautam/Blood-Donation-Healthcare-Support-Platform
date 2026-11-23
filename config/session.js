@@ -1,4 +1,18 @@
+const crypto = require('crypto');
 const MongoStore = require('connect-mongo');
+
+let fallbackSecret;
+
+function resolveSessionSecret() {
+  if (process.env.SESSION_SECRET) {
+    return process.env.SESSION_SECRET;
+  }
+  if (!fallbackSecret) {
+    fallbackSecret = crypto.randomBytes(32).toString('hex');
+    console.warn('SESSION_SECRET is not set; using an ephemeral per-process secret.');
+  }
+  return fallbackSecret;
+}
 
 function createSessionStore() {
   if (!process.env.MONGODB_URI) {
@@ -14,13 +28,9 @@ function createSessionStore() {
 function getSessionOptions(store) {
   const maxAge = Number(process.env.SESSION_MAX_AGE_MS) || 86400000;
 
-  if (!process.env.SESSION_SECRET) {
-    throw new Error('SESSION_SECRET is required');
-  }
-
   return {
     name: 'blood_donation_session',
-    secret: process.env.SESSION_SECRET,
+    secret: resolveSessionSecret(),
     store,
     resave: false,
     saveUninitialized: false,

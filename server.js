@@ -2,7 +2,8 @@ require('dotenv').config();
 
 const session = require('express-session');
 
-const { createApp } = require('./app');
+const defaultApp = require('./app');
+const { createApp } = defaultApp;
 const { connectDatabase } = require('./config/db');
 const { createSessionStore } = require('./config/session');
 
@@ -39,4 +40,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { start };
+defaultApp.start = start;
+module.exports = defaultApp;

@@ -1,6 +1,6 @@
 # Blood Donation Healthcare Support Platform
 
-A blood donation & healthcare support web application with a public donor/recipient portal, a BloodLink operations admin dashboard, and an Express API (`api/index.js` / `server.js`) ready for local hosting or Vercel deployment.
+A blood donation & healthcare support web application with a public donor/recipient portal, a BloodLink operations admin dashboard, and an Express API (`app.js` / `server.js`) ready for local hosting or Vercel deployment.
 
 ## How to run locally
 
@@ -32,13 +32,13 @@ npm test
 
 ## Deploying to Vercel
 
-This repository includes `vercel.json` and the serverless entrypoint `api/index.js`:
+This repository is configured for Vercel's Express runtime (`Express`) with `vercel.json`:
 
 1. Import the repository into Vercel (or run `vercel` via the Vercel CLI).
 2. Add environment variables in Vercel Project Settings if you want MongoDB-backed `/api/auth` endpoints:
    - `MONGODB_URI`
    - `SESSION_SECRET`
-3. Deploy — `vercel.json` serves static files from `assets/` and `pages/` and routes `/api/*` requests to `api/index.js`.
+3. Deploy — `vercel-build` copies `pages/` and `assets/` into `public/` for Vercel's CDN, `vercel.json` rewrites clean URLs (`/donate`, `/admin`, etc.), and Vercel wraps `app.js`/`server.js` for `/api/*`.
 
 ## Features
 

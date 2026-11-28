@@ -32,6 +32,13 @@ describe('application routes and static pages', () => {
     });
   });
 
+  test('exports callable Express handlers from app.js and server.js for serverless hosts', () => {
+    const exportedApp = require('../app');
+    const exportedServer = require('../server');
+    expect(typeof exportedApp).toBe('function');
+    expect(typeof exportedServer).toBe('function');
+  });
+
   test('returns 503 on database auth routes when MongoDB is disconnected', async () => {
     const response = await request(app)
       .post('/api/auth/login')

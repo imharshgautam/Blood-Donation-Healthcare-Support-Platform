@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { body } = require('express-validator');
 
+const { connectDatabase } = require('../config/db');
 const { signup, login, logout, me, csrfToken } = require('../controllers/authController');
 const requireAuth = require('../middleware/auth');
 const loginLimiter = require('../middleware/loginLimiter');
@@ -10,7 +11,15 @@ const validate = require('../middleware/validate');
 
 const router = express.Router();
 
-function requireDatabase(req, res, next) {
+async function requireDatabase(req, res, next) {
+  if (mongoose.connection.readyState !== 1 && process.env.MONGODB_URI && process.env.NODE_ENV !== 'test') {
+    try {
+      await connectDatabase();
+    } catch (error) {
+      // Handled below by returning 503
+    }
+  }
+
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({
       message: 'Database is not connected. Configure MONGODB_URI to use server authentication.',

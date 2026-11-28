@@ -2,15 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/", "destination": "/pages/index.html" },
-    { "source": "/index.html", "destination": "/pages/index.html" },
-    { "source": "/login.html", "destination": "/pages/login.html" },
-    { "source": "/signup.html", "destination": "/pages/signup.html" },
-    { "source": "/donate.html", "destination": "/pages/donate.html" },
-    { "source": "/contact.html", "destination": "/pages/contact.html" },
-    { "source": "/admin.html", "destination": "/pages/admin.html" },
-    { "source": "/(login|signup|donate|contact|admin)", "destination": "/pages/$1.html" }
+    { "source": "/(login|signup|donate|contact|admin)", "destination": "/$1.html" }
   ]
 }

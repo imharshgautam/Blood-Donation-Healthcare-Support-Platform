@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 
 const authRoutes = require('./routes/auth');
-const { getSessionOptions } = require('./config/session');
+const { createSessionStore, getSessionOptions } = require('./config/session');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const PAGES = ['index', 'login', 'signup', 'donate', 'contact', 'admin'];
@@ -14,6 +14,18 @@ const PAGES_DIR = path.join(__dirname, 'pages');
 
 function createApp({ sessionStore } = {}) {
   const app = express();
+
+  let resolvedStore = sessionStore;
+  if (!resolvedStore && process.env.MONGODB_URI && process.env.NODE_ENV !== 'test') {
+    try {
+      resolvedStore = createSessionStore();
+    } catch (error) {
+      console.warn(`Unable to initialize Mongo session store (${error.message}); using MemoryStore.`);
+    }
+  }
+  if (!resolvedStore) {
+    resolvedStore = new session.MemoryStore();
+  }
 
   const trustProxy = process.env.TRUST_PROXY !== undefined
     ? Number(process.env.TRUST_PROXY) || 0
@@ -27,7 +39,7 @@ function createApp({ sessionStore } = {}) {
   }));
   app.use(express.json({ limit: '16kb' }));
   app.use(express.urlencoded({ extended: false, limit: '16kb' }));
-  app.use(session(getSessionOptions(sessionStore)));
+  app.use(session(getSessionOptions(resolvedStore)));
 
   app.use('/api/auth', authRoutes);
 
@@ -58,4 +70,7 @@ function createApp({ sessionStore } = {}) {
   return app;
 }
 
-module.exports = { createApp };
+const app = createApp();
+app.createApp = createApp;
+
+module.exports = app;

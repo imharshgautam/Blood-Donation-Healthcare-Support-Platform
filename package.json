@@ -6,10 +6,12 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
+    "build": "node scripts/build-public.js",
+    "vercel-build": "node scripts/build-public.js",
     "test": "jest --runInBand"
   },
   "engines": {
-    "node": ">=18"
+    "node": "22.x"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
